@@ -18,7 +18,7 @@ samples, guidance on mobile development, and a full API reference.
 # UML
 
 ## Use Case
-![usecase](uml\usecase.png)
+![usecase](uml/usecase.png)
 
 ## Flowchart
 ![flowchart](https://)
