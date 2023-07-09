@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kasindi/view/page/home.dart';
 import 'package:kasindi/view/page/login.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Login()
+      home: Home()
       // const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
