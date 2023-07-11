@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:kasindi/controller/controller_transaksi.dart';
 import 'package:kasindi/view/page/input.dart';
 
 class Home extends StatefulWidget {
@@ -9,6 +11,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  var cTrans = ControllerTrans();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    cTrans.getTrans();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,7 +105,42 @@ class _HomeState extends State<Home> {
                             bottomRight: Radius.circular(70))),
                     child: Padding(
                       padding: EdgeInsets.only(left: 10, right: 10, bottom: 15),
-                      child: Container(),
+                      child: StreamBuilder<List<DocumentSnapshot>>(
+                        stream: cTrans.stream,
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+
+                          final List<DocumentSnapshot> data = snapshot.data!;
+
+                          return ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              padding: EdgeInsets.only(top: 10),
+                              itemCount: data.length,
+                              itemBuilder: (context, index) {
+                                final document = data[index];
+
+                                return GestureDetector(
+                                  onLongPress: () => showModalBottomSheet(
+                                      constraints: BoxConstraints(
+                                        maxHeight: 350,
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.only(
+                                              topLeft:
+                                                  Radius.elliptical(30, 30),
+                                              topRight:
+                                                  Radius.elliptical(30, 30))),
+                                      context: context,
+                                      builder: (context) => SizedBox()),
+                                      child: Container(),
+                                );
+                              });
+                        },
+                      ),
                     ),
                   ),
                   // Center(
