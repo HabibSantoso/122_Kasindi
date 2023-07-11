@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kasindi/view/page/home.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -90,12 +91,16 @@ class _LoginState extends State<Login> {
                                   //     MaterialPageRoute(
                                   //         builder: (BuildContext context) =>
                                   //             DashboardPage()),
-                                  //     (route) => false);
+                                  //     (route) => false);f
                                   // Navigator.pushAndRemoveUntil(
                                   //     context,
                                   //     MaterialPageRoute(
                                   //         builder: (context) =>
-                                  //             DashboardPage(), (route) => true));
+                                  //             Home(), (route) => true));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Home()));
                                 },
                                 child: Row(
                                   mainAxisAlignment:

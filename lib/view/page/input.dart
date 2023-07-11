@@ -13,8 +13,8 @@ const dummyidlist = <String>['123', '124', '125', '126', '127'];
 String? _slectedVel = "";
 
 class _InputState extends State<Input> {
-  final _idref = TextEditingController();
-  final _iduser = TextEditingController();
+  var _idref = TextEditingController();
+  var _iduser = TextEditingController();
   final _nominal = TextEditingController();
   final _dateinput = TextEditingController();
   final _keterangan = TextEditingController();
@@ -39,6 +39,7 @@ class _InputState extends State<Input> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   DropdownButtonFormField(
+                    
                       items: dummyidlist.map((e) {
                         return DropdownMenuItem(
                           child: Text(e),
@@ -47,7 +48,7 @@ class _InputState extends State<Input> {
                       }).toList(),
                       onChanged: (String? val) {
                         setState(() {
-                          _slectedVel = val;
+                          _idref = val as TextEditingController;
                         });
                       },
                       decoration: InputDecoration(
@@ -64,7 +65,7 @@ class _InputState extends State<Input> {
                       }).toList(),
                       onChanged: (String? val) {
                         setState(() {
-                          _slectedVel = val;
+                          _iduser = val as TextEditingController;
                         });
                       },
                       decoration: InputDecoration(
@@ -77,6 +78,7 @@ class _InputState extends State<Input> {
                   //       labelText: 'ID Akun', border: OutlineInputBorder()),
                   // ),
                   TextFormField(
+                    controller: _nominal,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                         labelText: 'Nominal',
@@ -125,6 +127,7 @@ class _InputState extends State<Input> {
                     //onSaved: ,
                   ),
                   TextFormField(
+                    controller: _keterangan,
                     decoration: InputDecoration(
                         labelText: 'Keterangan',
                         border: OutlineInputBorder(
@@ -175,7 +178,9 @@ class _InputState extends State<Input> {
                               width: 30,
                             ),
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                
+                              },
                               style: ElevatedButton.styleFrom(
                                   fixedSize: Size(150, 40),
                                   shape: RoundedRectangleBorder(
