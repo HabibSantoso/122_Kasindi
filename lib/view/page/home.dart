@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kasindi/view/page/input.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -94,12 +95,13 @@ class _HomeState extends State<Home> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 10, right: 10, bottom: 15),
                       child: Container(),
+                    ),
                   ),
-                ),
-                // Center(
-                //     child: FloatingActionButton(
-                //         child: const Icon(Icons.add), onPressed: () {}))
-            )],
+                  // Center(
+                  //     child: FloatingActionButton(
+                  //         child: const Icon(Icons.add), onPressed: () {}))
+                )
+              ],
             ),
           ),
         ),
@@ -107,8 +109,8 @@ class _HomeState extends State<Home> {
       floatingActionButton: FloatingActionButton(
         mini: false,
         onPressed: () {
-          // Navigator.push(context,
-          //     MaterialPageRoute(builder: (context) => InputTransaksi()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Input()));
         },
         child: Icon(
           Icons.add,

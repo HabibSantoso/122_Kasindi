@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "197292664833",
+    "project_id": "kasindi",
+    "storage_bucket": "kasindi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197292664833:android:c387da7208d9f726b13800",
+        "android_client_info": {
+          "package_name": "com.example.kasindi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "197292664833-qgm8kgudl0hbbbd0clf8th75njttm1dq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA55Z2pzQJ4ZN2RQ-glPyzkK2TDEoHBoS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "197292664833-qgm8kgudl0hbbbd0clf8th75njttm1dq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -13,7 +13,11 @@ const dummyidlist = <String>['123', '124', '125', '126', '127'];
 String? _slectedVel = "";
 
 class _InputState extends State<Input> {
-  TextEditingController _dateinput = TextEditingController();
+  final _idref = TextEditingController();
+  final _iduser = TextEditingController();
+  final _nominal = TextEditingController();
+  final _dateinput = TextEditingController();
+  final _keterangan = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
