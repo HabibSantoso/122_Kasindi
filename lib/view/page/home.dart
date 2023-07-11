@@ -137,7 +137,103 @@ class _HomeState extends State<Home> {
                                                   Radius.elliptical(30, 30))),
                                       context: context,
                                       builder: (context) => CustomBS()),
-                                      child: Container(),
+                                  child: Card(
+                                    color: Color(0xFFF7F3F3),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15))),
+                                    child: Container(
+                                        width: double.maxFinite,
+                                        height: 80,
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(15))),
+                                        child: //Center(child: Text('Elevated Card')),
+                                            Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: Container(
+                                                height: 55,
+                                                width: 55,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                50)),
+                                                    image: DecorationImage(
+                                                        fit: BoxFit.fitHeight,
+                                                        image: AssetImage(
+                                                            'assets/images/kasidi.png'))),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              //flex: 2,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 15),
+                                                child: Container(
+                                                  height: 80,
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceAround,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(document['id_user']),
+                                                      //Text(snapshot.data!.note),
+                                                      Text(document['tanggal'].toString()),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 20),
+                                              child: Container(
+                                                height: 80,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                            topRight: Radius
+                                                                .circular(15),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    15))),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(document['id_ref']),
+                                                    Text('Rp. ${document['nominal'].toString()}')
+                                                    //value_trans(trans: trans,),
+                                                    // if (snapshot.data!.type ==
+                                                    //     "D")
+                                                    //   Text(
+                                                    //       'Rp. -${snapshot.data!.val}'),
+                                                    // if (snapshot.data!.type ==
+                                                    //     "W")
+                                                    //   Text(
+                                                    //       'Rp. ${snapshot.data!.val}'),
+                                                    // if (snapshot.data!.type ==
+                                                    //     "K")
+                                                    //   Text(
+                                                    //       'Rp. ${snapshot.data!.val}')
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )),
+                                  ),
                                 );
                               });
                         },
