@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kasindi/controller/controller_transaksi.dart';
 import 'package:kasindi/view/page/input.dart';
+import 'package:kasindi/view/widget/buttomsheet.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -135,7 +136,7 @@ class _HomeState extends State<Home> {
                                               topRight:
                                                   Radius.elliptical(30, 30))),
                                       context: context,
-                                      builder: (context) => SizedBox()),
+                                      builder: (context) => CustomBS()),
                                       child: Container(),
                                 );
                               });
