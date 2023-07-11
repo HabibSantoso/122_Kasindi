@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:kasindi/controller/controller_transaksi.dart';
+import 'package:kasindi/model/model_transaksi.dart';
 import 'package:kasindi/view/page/home.dart';
 
 class Input extends StatefulWidget {
@@ -18,6 +20,7 @@ class _InputState extends State<Input> {
   final _nominal = TextEditingController();
   final _dateinput = TextEditingController();
   final _keterangan = TextEditingController();
+  ControllerTrans cTrans = new ControllerTrans();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +42,6 @@ class _InputState extends State<Input> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   DropdownButtonFormField(
-                    
                       items: dummyidlist.map((e) {
                         return DropdownMenuItem(
                           child: Text(e),
@@ -179,7 +181,14 @@ class _InputState extends State<Input> {
                             ),
                             ElevatedButton(
                               onPressed: () {
-                                
+                                final mdTrans = ModelTransaksi(
+                                    id_ref: _idref.text,
+                                    id_user: _iduser.text,
+                                    nominal: int.parse(_nominal.text),
+                                    tanggal: DateTime.parse(_dateinput.text),
+                                    keterangan: _keterangan.text);
+
+                                cTrans.addTransaksi(mdTrans);
                               },
                               style: ElevatedButton.styleFrom(
                                   fixedSize: Size(150, 40),
