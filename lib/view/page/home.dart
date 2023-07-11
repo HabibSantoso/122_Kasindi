@@ -187,7 +187,7 @@ class _HomeState extends State<Home> {
                                                     children: [
                                                       Text(document['id_user']),
                                                       //Text(snapshot.data!.note),
-                                                      Text(document['tanggal'].toString()),
+                                                      Text(document['tanggal']),
                                                     ],
                                                   ),
                                                 ),
@@ -213,7 +213,8 @@ class _HomeState extends State<Home> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(document['id_ref']),
-                                                    Text('Rp. ${document['nominal'].toString()}')
+                                                    Text(
+                                                        'Rp. ${document['nominal'].toString()}')
                                                     //value_trans(trans: trans,),
                                                     // if (snapshot.data!.type ==
                                                     //     "D")

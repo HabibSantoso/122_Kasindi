@@ -15,8 +15,8 @@ const dummyidlist = <String>['123', '124', '125', '126', '127'];
 String? _slectedVel = "";
 
 class _InputState extends State<Input> {
-  var _idref = TextEditingController();
-  var _iduser = TextEditingController();
+  String? _idref = "";
+  String? _iduser = "";
   final _nominal = TextEditingController();
   final _dateinput = TextEditingController();
   final _keterangan = TextEditingController();
@@ -50,7 +50,7 @@ class _InputState extends State<Input> {
                       }).toList(),
                       onChanged: (String? val) {
                         setState(() {
-                          _idref = val as TextEditingController;
+                          _idref = val;
                         });
                       },
                       decoration: InputDecoration(
@@ -67,7 +67,7 @@ class _InputState extends State<Input> {
                       }).toList(),
                       onChanged: (String? val) {
                         setState(() {
-                          _iduser = val as TextEditingController;
+                          _iduser = val;
                         });
                       },
                       decoration: InputDecoration(
@@ -182,13 +182,19 @@ class _InputState extends State<Input> {
                             ElevatedButton(
                               onPressed: () {
                                 final mdTrans = ModelTransaksi(
-                                    id_ref: _idref.text,
-                                    id_user: _iduser.text,
+                                    id_ref: _idref!,
+                                    id_user: _iduser!,
                                     nominal: int.parse(_nominal.text),
-                                    tanggal: DateTime.parse(_dateinput.text),
+                                    tanggal: _dateinput.text,
                                     keterangan: _keterangan.text);
 
                                 cTrans.addTransaksi(mdTrans);
+
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Home()),
+                                    (route) => false);
                               },
                               style: ElevatedButton.styleFrom(
                                   fixedSize: Size(150, 40),

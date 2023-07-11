@@ -5,7 +5,7 @@ class ModelTransaksi {
   String id_ref;
   String id_user;
   int nominal;
-  DateTime tanggal;
+  String tanggal;
   String keterangan;
   ModelTransaksi({
     this.id,
@@ -15,6 +15,7 @@ class ModelTransaksi {
     required this.tanggal,
     required this.keterangan,
   });
+  
 
   Map<String, dynamic> toMap() {
     return {
@@ -22,7 +23,7 @@ class ModelTransaksi {
       'id_ref': id_ref,
       'id_user': id_user,
       'nominal': nominal,
-      'tanggal': tanggal.millisecondsSinceEpoch,
+      'tanggal': tanggal,
       'keterangan': keterangan,
     };
   }
@@ -33,7 +34,7 @@ class ModelTransaksi {
       id_ref: map['id_ref'] ?? '',
       id_user: map['id_user'] ?? '',
       nominal: map['nominal']?.toInt() ?? 0,
-      tanggal: DateTime.fromMillisecondsSinceEpoch(map['tanggal']),
+      tanggal: map['tanggal'] ?? '',
       keterangan: map['keterangan'] ?? '',
     );
   }
