@@ -30,5 +30,8 @@ class ControllerTrans {
     return transaksi.docs;
   }
 
-  
+  Future deleteTrans(String id) async {
+    final transaksi = await transaksicolltion.doc(id).delete();
+    return transaksi;
+  }
 }
