@@ -1,18 +1,24 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import 'package:kasindi/controller/controller_transaksi.dart';
 import 'package:kasindi/model/model_transaksi.dart';
 import 'package:kasindi/view/page/home.dart';
 
 class Edit extends StatefulWidget {
-  const Edit({super.key});
+  Edit({
+    Key? key,
+    required this.documentstate,
+  }) : super(key: key);
+
+  final DocumentSnapshot<Object?> documentstate;
 
   @override
   State<Edit> createState() => _EditState();
 }
 
 const dummyidlist = <String>['123', '124', '125', '126', '127'];
-String? _slectedVel = "";
 
 class _EditState extends State<Edit> {
   String? _idref = "";
@@ -20,13 +26,20 @@ class _EditState extends State<Edit> {
   final _nominal = TextEditingController();
   final _dateinput = TextEditingController();
   final _keterangan = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _nominal.text = widget.documentstate['nominal'].toString();
+    _dateinput.text = widget.documentstate['tanggal'].toString();
+    _keterangan.text = widget.documentstate['keterangan'].toString();
+    super.initState();
+  }
+
   ControllerTrans cTrans = new ControllerTrans();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Form Transaksi'),
-      // ),
       body: Container(
         color: Color(0xFF5CC2F2),
         child: Padding(
@@ -42,6 +55,7 @@ class _EditState extends State<Edit> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   DropdownButtonFormField(
+                      value: widget.documentstate['id_ref'].toString() ?? "",
                       items: dummyidlist.map((e) {
                         return DropdownMenuItem(
                           child: Text(e),
@@ -53,12 +67,16 @@ class _EditState extends State<Edit> {
                           _idref = val;
                         });
                       },
+                      onSaved: (val) {
+                        _idref = val;
+                      },
                       decoration: InputDecoration(
                         labelText: 'ID Ref',
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(50)),
                       )),
                   DropdownButtonFormField(
+                      value: widget.documentstate['id_user'].toString() ?? "",
                       items: dummyidlist.map((e) {
                         return DropdownMenuItem(
                           child: Text(e),
@@ -70,6 +88,9 @@ class _EditState extends State<Edit> {
                           _iduser = val;
                         });
                       },
+                      onSaved: (val) {
+                        _iduser = val;
+                      },
                       decoration: InputDecoration(
                         labelText: 'ID Akun',
                         border: OutlineInputBorder(
@@ -80,6 +101,7 @@ class _EditState extends State<Edit> {
                   //       labelText: 'ID Akun', border: OutlineInputBorder()),
                   // ),
                   TextFormField(
+                    //initialValue: widget.documentstate["nominal"].toString()!,
                     controller: _nominal,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
@@ -89,8 +111,12 @@ class _EditState extends State<Edit> {
                         prefixText: 'Rp. ',
                         suffixText: 'IDR',
                         suffixStyle: TextStyle(color: Colors.green)),
+                    // onChanged: (val) {
+                    //   _nominal.text = val;
+                    // },
                   ),
                   TextFormField(
+                    //initialValue: widget.documentstate['tanggal'].toString(),
                     controller: _dateinput,
                     decoration: InputDecoration(
                       labelText: 'Tanggal',
@@ -105,7 +131,7 @@ class _EditState extends State<Edit> {
                           initialDate: DateTime.now(),
                           firstDate: DateTime(2020),
                           lastDate: DateTime(2030));
-                          
+
                       if (pickedDate != null) {
                         setState(() {
                           _dateinput.text =
@@ -113,16 +139,21 @@ class _EditState extends State<Edit> {
                         });
                       }
                     },
-                    //onChanged: ,
-                    //onSaved: ,
+                    // onSaved: (val) {
+                    //   _dateinput.text = val!;
+                    // },
                   ),
                   TextFormField(
+                    //initialValue: widget.documentstate['keterangan'].toString(),
                     controller: _keterangan,
                     decoration: InputDecoration(
                         labelText: 'Keterangan',
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30))),
                     maxLines: 3,
+                    // onFieldSubmitted: (val) {
+                    //   _keterangan.text = val!;
+                    // },
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -170,13 +201,14 @@ class _EditState extends State<Edit> {
                             ElevatedButton(
                               onPressed: () {
                                 final mdTrans = ModelTransaksi(
+                                    id: widget.documentstate['id'],
                                     id_ref: _idref!,
                                     id_user: _iduser!,
                                     nominal: int.parse(_nominal.text),
                                     tanggal: _dateinput.text,
                                     keterangan: _keterangan.text);
 
-                                cTrans.addTransaksi(mdTrans);
+                                cTrans.editTrans(mdTrans);
 
                                 Navigator.pushAndRemoveUntil(
                                     context,

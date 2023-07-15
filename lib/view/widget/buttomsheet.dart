@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:kasindi/view/page/edit.dart';
 
 import 'package:kasindi/view/page/home.dart';
 
@@ -67,7 +68,15 @@ class CustomBS extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                      IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Edit(documentstate: document)));
+                          },
+                          icon: Icon(Icons.edit)),
                       IconButton(
                           onPressed: () {
                             cTrans.deleteTrans(document['id']);
