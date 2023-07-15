@@ -5,7 +5,7 @@ class ModelUser {
   String name;
   String email;
   String role;
-  String is_admin;
+  bool is_admin;
   String phone;
   ModelUser({
     this.id,
@@ -15,6 +15,7 @@ class ModelUser {
     required this.is_admin,
     required this.phone,
   });
+  
 
   Map<String, dynamic> toMap() {
     return {
@@ -33,7 +34,7 @@ class ModelUser {
       name: map['name'] ?? '',
       email: map['email'] ?? '',
       role: map['role'] ?? '',
-      is_admin: map['is_admin'] ?? '',
+      is_admin: map['is_admin'] ?? false,
       phone: map['phone'] ?? '',
     );
   }

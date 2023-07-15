@@ -52,7 +52,7 @@ class ControllerUser {
           name: snapshot['name'] ?? '',
           phone: snapshot['phone'] ?? '',
           role: snapshot['role'] ?? '',
-          is_admin: snapshot['is_admin'] ?? '',
+          is_admin: snapshot['is_admin'] ?? false,
         );
 
         return currentUser;
@@ -80,7 +80,7 @@ class ControllerUser {
           name: name,
           phone: phone,
           role: role,
-          is_admin: "false",
+          is_admin: false,
         );
 
         await userColection.doc(newUser.id).set(newUser.toMap());
