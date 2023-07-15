@@ -34,4 +34,18 @@ class ControllerTrans {
     final transaksi = await transaksicolltion.doc(id).delete();
     return transaksi;
   }
+
+  Future editTrans(ModelTransaksi mdTrans) async {
+    final ModelTransaksi mdTrans_update = ModelTransaksi(
+        id: mdTrans.id,
+        id_ref: mdTrans.id_ref,
+        id_user: mdTrans.id_user,
+        nominal: mdTrans.nominal,
+        tanggal: mdTrans.tanggal,
+        keterangan: mdTrans.keterangan);
+
+    return await transaksicolltion
+        .doc(mdTrans.id)
+        .update(mdTrans_update.toMap());
+  }
 }
