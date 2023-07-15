@@ -123,6 +123,7 @@ class _HomeState extends State<Home> {
                               itemCount: data.length,
                               itemBuilder: (context, index) {
                                 final document = data[index];
+                                final String idf = document['id'].toString();
 
                                 return GestureDetector(
                                   onLongPress: () => showModalBottomSheet(
@@ -136,7 +137,9 @@ class _HomeState extends State<Home> {
                                               topRight:
                                                   Radius.elliptical(30, 30))),
                                       context: context,
-                                      builder: (context) => CustomBS()),
+                                      builder: (context) => CustomBS(
+                                            id: idf,
+                                          )),
                                   child: Card(
                                     color: Color(0xFFF7F3F3),
                                     shape: RoundedRectangleBorder(

@@ -105,19 +105,7 @@ class _InputState extends State<Input> {
                           initialDate: DateTime.now(),
                           firstDate: DateTime(2020),
                           lastDate: DateTime(2030));
-                      //     .then((DateTime? value) {
-                      //   if (value != null) {
-                      //     DateTime _formatDate;
-                      //     _formatDate = value;
-                      //     String date = DateFormat.yMMMd().format(_formatDate);
-                      //     ScaffoldMessenger.of(context).showSnackBar(
-                      //         SnackBar(content: Text('Selected date: $date')));
-                      //     setState(() {
-                      //       _dateinput.text = date;
-                      //     });
-                      //   }
-                      // });
-
+                          
                       if (pickedDate != null) {
                         setState(() {
                           _dateinput.text =

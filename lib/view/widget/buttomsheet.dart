@@ -1,9 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import 'package:kasindi/view/page/home.dart';
+
+import '../../controller/controller_transaksi.dart';
+
 class CustomBS extends StatelessWidget {
-  const CustomBS({
-    super.key,
-  });
+  String id;
+  DocumentSnapshot<Object?> document;
+
+  CustomBS({
+    Key? key,
+    required this.id,
+    required this.document,
+  }) : super(key: key);
+
+  ControllerTrans cTrans = new ControllerTrans();
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +68,15 @@ class CustomBS extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
-                      IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
+                      IconButton(
+                          onPressed: () {
+                            cTrans.deleteTrans(document['id']);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Home()));
+                          },
+                          icon: Icon(Icons.delete)),
                     ],
                   ),
                 )
