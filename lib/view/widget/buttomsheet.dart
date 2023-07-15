@@ -6,12 +6,12 @@ import 'package:kasindi/view/page/home.dart';
 import '../../controller/controller_transaksi.dart';
 
 class CustomBS extends StatelessWidget {
-  String id;
+  //String id;
   DocumentSnapshot<Object?> document;
 
   CustomBS({
     Key? key,
-    required this.id,
+    //required this.id,
     required this.document,
   }) : super(key: key);
 
