@@ -215,19 +215,6 @@ class _HomeState extends State<Home> {
                                                     Text(document['id_ref']),
                                                     Text(
                                                         'Rp. ${document['nominal'].toString()}')
-                                                    //value_trans(trans: trans,),
-                                                    // if (snapshot.data!.type ==
-                                                    //     "D")
-                                                    //   Text(
-                                                    //       'Rp. -${snapshot.data!.val}'),
-                                                    // if (snapshot.data!.type ==
-                                                    //     "W")
-                                                    //   Text(
-                                                    //       'Rp. ${snapshot.data!.val}'),
-                                                    // if (snapshot.data!.type ==
-                                                    //     "K")
-                                                    //   Text(
-                                                    //       'Rp. ${snapshot.data!.val}')
                                                   ],
                                                 ),
                                               ),

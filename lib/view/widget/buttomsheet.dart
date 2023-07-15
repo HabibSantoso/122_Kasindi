@@ -48,6 +48,18 @@ class CustomBS extends StatelessWidget {
                     ],
                   ),
                 ),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 18, right: 18, bottom: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                      IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
+                    ],
+                  ),
+                )
                 //Text('test bottom seet')
               ],
             ),

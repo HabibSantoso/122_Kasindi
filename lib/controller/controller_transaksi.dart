@@ -29,4 +29,6 @@ class ControllerTrans {
     streamController.sink.add(transaksi.docs);
     return transaksi.docs;
   }
+
+  
 }
