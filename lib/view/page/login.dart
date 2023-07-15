@@ -10,6 +10,9 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   bool _obscureText = true;
+  bool is_login = true;
+  final _nEmail = TextEditingController();
+  final _nPass = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,20 +42,22 @@ class _LoginState extends State<Login> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 15, horizontal: 0),
                           child: TextFormField(
+                            controller: _nEmail,
                             decoration: InputDecoration(
-                              hintText: 'Masukkan Username',
+                              hintText: 'Masukkan Email',
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(50)),
                             ),
-                            onChanged: (val) {
-                              // username = val;
-                            },
+                            // onChanged: (val) {
+                            //   // username = val;
+                            // },
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 15, horizontal: 0),
                           child: TextFormField(
+                            controller: _nPass,
                             obscureText: _obscureText,
                             decoration: InputDecoration(
                                 suffixIcon: GestureDetector(
@@ -68,9 +73,9 @@ class _LoginState extends State<Login> {
                                 hintText: 'Masukkan Password',
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(50))),
-                            onChanged: (val) {
-                              // password = val;
-                            },
+                            // onChanged: (val) {
+                            //   // password = val;
+                            // },
                             onFieldSubmitted: (String value) {},
                           ),
                         ),

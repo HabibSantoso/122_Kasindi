@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kasindi/controller/controller_transaksi.dart';
+import 'package:kasindi/controller/controller_user.dart';
 import 'package:kasindi/view/page/input.dart';
 import 'package:kasindi/view/widget/buttomsheet.dart';
 
@@ -13,6 +15,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   var cTrans = ControllerTrans();
+  //final User? user = ControllerUser().currentUser;
 
   @override
   void initState() {

@@ -12,6 +12,8 @@ class ControllerUser {
   final StreamController<List<DocumentSnapshot>> streamController =
       StreamController<List<DocumentSnapshot>>.broadcast();
 
+  //User? get currentUser => auth.currentUser;
+
   Stream<List<DocumentSnapshot>> get stream => streamController.stream;
 
   Stream<User?> get authStateChanges => auth.authStateChanges();
