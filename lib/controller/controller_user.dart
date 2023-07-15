@@ -22,9 +22,12 @@ class ControllerUser {
     return user.docs;
   }
 
-  Future deleteUser(String id) async {
-    final user = await userColection.doc(id).delete();
-    return user;
+  Future<void> deleteUser(String id) async {
+    await userColection.doc(id).delete();
+  }
+
+  Future<void> singOut() async {
+    await auth.signOut();
   }
 
   // ModelUser? getCurrentUser() {
