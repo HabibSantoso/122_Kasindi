@@ -30,6 +30,8 @@ class _EditState extends State<Edit> {
   @override
   void initState() {
     // TODO: implement initState
+    _idref = widget.documentstate['id_ref'].toString();
+    _iduser = widget.documentstate['id_user'].toString();
     _nominal.text = widget.documentstate['nominal'].toString();
     _dateinput.text = widget.documentstate['tanggal'].toString();
     _keterangan.text = widget.documentstate['keterangan'].toString();
@@ -67,9 +69,9 @@ class _EditState extends State<Edit> {
                           _idref = val;
                         });
                       },
-                      onSaved: (val) {
-                        _idref = val;
-                      },
+                      // onSaved: (val) {
+                      //   _idref = val;
+                      // },
                       decoration: InputDecoration(
                         labelText: 'ID Ref',
                         border: OutlineInputBorder(
@@ -88,9 +90,9 @@ class _EditState extends State<Edit> {
                           _iduser = val;
                         });
                       },
-                      onSaved: (val) {
-                        _iduser = val;
-                      },
+                      // onSaved: (val) {
+                      //   _iduser = val;
+                      // },
                       decoration: InputDecoration(
                         labelText: 'ID Akun',
                         border: OutlineInputBorder(
