@@ -39,22 +39,22 @@ class CustomBS extends StatelessWidget {
                   child: ListView(
                     children: [
                       ListTile(
-                        title: Text('Admin A'),
+                        title: Text(document['tanggal'].toString()),
                         dense: true,
                       ),
                       Divider(),
                       ListTile(
-                        title: Text('Untuk membelu kopi kantor'),
+                        title: Text(document['id_ref'].toString()),
                         dense: true,
                       ),
                       Divider(),
                       ListTile(
-                        title: Text('2-05-2023'),
+                        title: Text(document['keterangan'].toString()),
                         dense: true,
                       ),
                       Divider(),
                       ListTile(
-                        title: Text('Rp. 250.000.00-'),
+                        title: Text(document['nominal'].toString()),
                         dense: true,
                       ),
                       Divider(),
@@ -101,7 +101,30 @@ class CustomBS extends StatelessWidget {
                 child: SizedBox(
                   height: 80,
                   width: 250,
-                  child: Text('Admin A'),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Container(
+                          height: 55,
+                          width: 55,
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(50)),
+                              image: DecorationImage(
+                                  fit: BoxFit.fitHeight,
+                                  image:
+                                      AssetImage('assets/images/kasidi.png'))),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Text(document['id_user']),
+                      )
+                    ],
+                  ),
                 ),
               ))
         ]);

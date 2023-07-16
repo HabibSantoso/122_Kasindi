@@ -19,10 +19,12 @@ class Edit extends StatefulWidget {
 }
 
 const dummyidlist = <String>['123', '124', '125', '126', '127'];
+List<String> jenisTrans = ['Pemasukan', 'Pengeluaran'];
 
 class _EditState extends State<Edit> {
   String? _idref = "";
   String? _iduser = "";
+  final _userPJ = TextEditingController();
   final _nominal = TextEditingController();
   final _dateinput = TextEditingController();
   final _keterangan = TextEditingController();
@@ -31,7 +33,7 @@ class _EditState extends State<Edit> {
   void initState() {
     // TODO: implement initState
     _idref = widget.documentstate['id_ref'].toString();
-    _iduser = widget.documentstate['id_user'].toString();
+    _userPJ.text = widget.documentstate['id_user'].toString();
     _nominal.text = widget.documentstate['nominal'].toString();
     _dateinput.text = widget.documentstate['tanggal'].toString();
     _keterangan.text = widget.documentstate['keterangan'].toString();
@@ -58,7 +60,7 @@ class _EditState extends State<Edit> {
                 children: [
                   DropdownButtonFormField(
                       value: widget.documentstate['id_ref'].toString() ?? "",
-                      items: dummyidlist.map((e) {
+                      items: jenisTrans.map((e) {
                         return DropdownMenuItem(
                           child: Text(e),
                           value: e,
@@ -77,31 +79,32 @@ class _EditState extends State<Edit> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(50)),
                       )),
-                  DropdownButtonFormField(
-                      value: widget.documentstate['id_user'].toString() ?? "",
-                      items: dummyidlist.map((e) {
-                        return DropdownMenuItem(
-                          child: Text(e),
-                          value: e,
-                        );
-                      }).toList(),
-                      onChanged: (String? val) {
-                        setState(() {
-                          _iduser = val;
-                        });
-                      },
-                      // onSaved: (val) {
-                      //   _iduser = val;
-                      // },
-                      decoration: InputDecoration(
-                        labelText: 'ID Akun',
+                  // DropdownButtonFormField(
+                  //     value: widget.documentstate['id_user'].toString() ?? "",
+                  //     items: dummyidlist.map((e) {
+                  //       return DropdownMenuItem(
+                  //         child: Text(e),
+                  //         value: e,
+                  //       );
+                  //     }).toList(),
+                  //     onChanged: (String? val) {
+                  //       setState(() {
+                  //         _iduser = val;
+                  //       });
+                  //     },
+                  //     decoration: InputDecoration(
+                  //       labelText: 'ID Akun',
+                  //       border: OutlineInputBorder(
+                  //           borderRadius: BorderRadius.circular(50)),
+                  //     )),
+                  TextFormField(
+                    controller: _userPJ,
+                    decoration: InputDecoration(
+                        labelText: 'Akun Penanggung Jawab',
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50)),
-                      )),
-                  // TextFormField(
-                  //   decoration: InputDecoration(
-                  //       labelText: 'ID Akun', border: OutlineInputBorder()),
-                  // ),
+                            borderRadius: BorderRadius.circular(30))),
+                    enabled: false,
+                  ),
                   TextFormField(
                     //initialValue: widget.documentstate["nominal"].toString()!,
                     controller: _nominal,
@@ -160,20 +163,20 @@ class _EditState extends State<Edit> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 10),
-                        child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                                fixedSize: Size(double.maxFinite, 40),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30))),
-                            child: Text('FOTO BUKTI KETERANGAN',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold))),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(
+                      //       vertical: 5, horizontal: 10),
+                      //   child: ElevatedButton(
+                      //       onPressed: () {},
+                      //       style: ElevatedButton.styleFrom(
+                      //           fixedSize: Size(double.maxFinite, 40),
+                      //           shape: RoundedRectangleBorder(
+                      //               borderRadius: BorderRadius.circular(30))),
+                      //       child: Text('FOTO BUKTI KETERANGAN',
+                      //           style: TextStyle(
+                      //               fontSize: 20,
+                      //               fontWeight: FontWeight.bold))),
+                      // ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 5, horizontal: 0),
@@ -205,7 +208,7 @@ class _EditState extends State<Edit> {
                                 final mdTrans = ModelTransaksi(
                                     id: widget.documentstate['id'],
                                     id_ref: _idref!,
-                                    id_user: _iduser!,
+                                    id_user: _userPJ.text,
                                     nominal: int.parse(_nominal.text),
                                     tanggal: _dateinput.text,
                                     keterangan: _keterangan.text);

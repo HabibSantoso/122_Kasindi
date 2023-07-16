@@ -1,26 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import 'package:kasindi/controller/controller_transaksi.dart';
 import 'package:kasindi/model/model_transaksi.dart';
 import 'package:kasindi/view/page/home.dart';
 
 class Input extends StatefulWidget {
-  const Input({super.key});
+  const Input({
+    Key? key,
+    required this.namePJ,
+  }) : super(key: key);
+  final String namePJ;
 
   @override
   State<Input> createState() => _InputState();
 }
 
 const dummyidlist = <String>['123', '124', '125', '126', '127'];
+List<String> jenisTrans = ['Pemasukan', 'Pengeluaran'];
 String? _slectedVel = "";
 
 class _InputState extends State<Input> {
   String? _idref = "";
   String? _iduser = "";
+  final _userPJ = TextEditingController();
   final _nominal = TextEditingController();
   final _dateinput = TextEditingController();
   final _keterangan = TextEditingController();
   ControllerTrans cTrans = new ControllerTrans();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _userPJ.text = widget.namePJ;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +57,7 @@ class _InputState extends State<Input> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   DropdownButtonFormField(
-                      items: dummyidlist.map((e) {
+                      items: jenisTrans.map((e) {
                         return DropdownMenuItem(
                           child: Text(e),
                           value: e,
@@ -54,31 +69,35 @@ class _InputState extends State<Input> {
                         });
                       },
                       decoration: InputDecoration(
-                        labelText: 'ID Ref',
+                        labelText: 'Type Mutasi',
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(50)),
                       )),
-                  DropdownButtonFormField(
-                      items: dummyidlist.map((e) {
-                        return DropdownMenuItem(
-                          child: Text(e),
-                          value: e,
-                        );
-                      }).toList(),
-                      onChanged: (String? val) {
-                        setState(() {
-                          _iduser = val;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        labelText: 'ID Akun',
+                  // DropdownButtonFormField(
+                  //     items: dummyidlist.map((e) {
+                  //       return DropdownMenuItem(
+                  //         child: Text(e),
+                  //         value: e,
+                  //       );
+                  //     }).toList(),
+                  //     onChanged: (String? val) {
+                  //       setState(() {
+                  //         _iduser = val;
+                  //       });
+                  //     },
+                  //     decoration: InputDecoration(
+                  //       labelText: 'Akun Penanggung Jawab',
+                  //       border: OutlineInputBorder(
+                  //           borderRadius: BorderRadius.circular(50)),
+                  //     )),
+                  TextFormField(
+                    controller: _userPJ,
+                    decoration: InputDecoration(
+                        labelText: 'Akun Penanggung Jawab',
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50)),
-                      )),
-                  // TextFormField(
-                  //   decoration: InputDecoration(
-                  //       labelText: 'ID Akun', border: OutlineInputBorder()),
-                  // ),
+                            borderRadius: BorderRadius.circular(30))),
+                    enabled: false,
+                  ),
                   TextFormField(
                     controller: _nominal,
                     keyboardType: TextInputType.number,
@@ -105,7 +124,7 @@ class _InputState extends State<Input> {
                           initialDate: DateTime.now(),
                           firstDate: DateTime(2020),
                           lastDate: DateTime(2030));
-                          
+
                       if (pickedDate != null) {
                         setState(() {
                           _dateinput.text =
@@ -127,20 +146,20 @@ class _InputState extends State<Input> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 10),
-                        child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                                fixedSize: Size(double.maxFinite, 40),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30))),
-                            child: Text('FOTO BUKTI KETERANGAN',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold))),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(
+                      //       vertical: 5, horizontal: 10),
+                      //   child: ElevatedButton(
+                      //       onPressed: () {},
+                      //       style: ElevatedButton.styleFrom(
+                      //           fixedSize: Size(double.maxFinite, 40),
+                      //           shape: RoundedRectangleBorder(
+                      //               borderRadius: BorderRadius.circular(30))),
+                      //       child: Text('FOTO BUKTI KETERANGAN',
+                      //           style: TextStyle(
+                      //               fontSize: 20,
+                      //               fontWeight: FontWeight.bold))),
+                      // ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 5, horizontal: 0),
@@ -171,7 +190,7 @@ class _InputState extends State<Input> {
                               onPressed: () {
                                 final mdTrans = ModelTransaksi(
                                     id_ref: _idref!,
-                                    id_user: _iduser!,
+                                    id_user: _userPJ.text,
                                     nominal: int.parse(_nominal.text),
                                     tanggal: _dateinput.text,
                                     keterangan: _keterangan.text);

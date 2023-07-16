@@ -255,7 +255,9 @@ class _HomeState extends State<Home> {
         mini: false,
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Input()));
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Input(namePJ: currUser?.name ?? '')));
         },
         child: Icon(
           Icons.add,
