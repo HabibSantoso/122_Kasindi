@@ -32,69 +32,102 @@ class ControllerUser {
     await auth.signOut();
   }
 
-  // ModelUser? getCurrentUser() {
-  //   final User? user = auth.currentUser;
-  //   if (user != null) {
-  //     return ModelUser.fromJson(user);
-  //   }
-  //   return null;
-  // }
+  Future<ModelUser?> getCurrentUser() async {
+    final User? user = auth.currentUser;
+    if (user != null) {
+      final DocumentSnapshot snapshot = await userColection.doc(user.uid).get();
 
-  Future<ModelUser?> singInWithEmailandPassworrd(
-      String email, String password) async {
-    try {
-      final UserCredential userCredential = await auth
-          .signInWithEmailAndPassword(email: email, password: password);
-      final User? user = userCredential.user;
+      final ModelUser currentUser = ModelUser(
+        id: user.uid,
+        email: user.email ?? '',
+        name: snapshot['name'] ?? '',
+        phone: snapshot['phone'] ?? '',
+        role: snapshot['role'] ?? '',
+        is_admin: snapshot['is_admin'] ?? false,
+      );
 
-      if (user != null) {
-        final DocumentSnapshot snapshot =
-            await userColection.doc(user.uid).get();
-
-        final ModelUser currentUser = ModelUser(
-          id: user.uid,
-          email: user.email ?? '',
-          name: snapshot['name'] ?? '',
-          phone: snapshot['phone'] ?? '',
-          role: snapshot['role'] ?? '',
-          is_admin: snapshot['is_admin'] ?? false,
-        );
-
-        return currentUser;
-      }
-    } on FirebaseAuthException catch (e) {
-      print(e.message);
+      return currentUser;
     }
     return null;
   }
 
-  Future<ModelUser?> regiterWithEmailandPassworrd(String email, String password,
+  Future<void> signInOnly(String email, String password) async {
+    await auth.signInWithEmailAndPassword(email: email, password: password);
+  }
+  // Future<ModelUser?> singInWithEmailandPassworrd(
+  //     String email, String password) async {
+  //   try {
+  //     final UserCredential userCredential = await auth
+  //         .signInWithEmailAndPassword(email: email, password: password);
+  //     final User? user = userCredential.user;
+
+  //     if (user != null) {
+  //       final DocumentSnapshot snapshot =
+  //           await userColection.doc(user.uid).get();
+
+  //       final ModelUser currentUser = ModelUser(
+  //         id: user.uid,
+  //         email: user.email ?? '',
+  //         name: snapshot['name'] ?? '',
+  //         phone: snapshot['phone'] ?? '',
+  //         role: snapshot['role'] ?? '',
+  //         is_admin: snapshot['is_admin'] ?? false,
+  //       );
+
+  //       return currentUser;
+  //     }
+  //   } on FirebaseAuthException catch (e) {
+  //     print(e.message);
+  //   }
+  //   return null;
+  // }
+
+  Future<void> regiterWithEmailandPassworrd(String email, String password,
       String name, String phone, String role) async {
-    try {
-      final UserCredential userCredential = await auth
-          .createUserWithEmailAndPassword(email: email, password: password);
-      final User? user = userCredential.user;
+    final UserCredential userCredential = await auth
+        .createUserWithEmailAndPassword(email: email, password: password);
+    final User? user = userCredential.user;
 
-      if (user != null) {
-        // final DocumentSnapshot snapshot =
-        //     await userColection.doc(user.uid).get();
+    if (user != null) {
+      final ModelUser newUser = ModelUser(
+        id: user.uid,
+        email: user.email ?? '',
+        name: name,
+        phone: phone,
+        role: role,
+        is_admin: false,
+      );
 
-        final ModelUser newUser = ModelUser(
-          id: user.uid,
-          email: user.email ?? '',
-          name: name,
-          phone: phone,
-          role: role,
-          is_admin: false,
-        );
-
-        await userColection.doc(newUser.id).set(newUser.toMap());
-
-        return newUser;
-      }
-    } on FirebaseAuthException catch (e) {
-      print(e.message);
+      await userColection.doc(newUser.id).set(newUser.toMap());
     }
-    return null;
+    // Future<ModelUser?> regiterWithEmailandPassworrd(String email, String password,
+    //     String name, String phone, String role) async {
+    //   try {
+    //     final UserCredential userCredential = await auth
+    //         .createUserWithEmailAndPassword(email: email, password: password);
+    //     final User? user = userCredential.user;
+
+    //     if (user != null) {
+    //       // final DocumentSnapshot snapshot =
+    //       //     await userColection.doc(user.uid).get();
+
+    //       final ModelUser newUser = ModelUser(
+    //         id: user.uid,
+    //         email: user.email ?? '',
+    //         name: name,
+    //         phone: phone,
+    //         role: role,
+    //         is_admin: false,
+    //       );
+
+    //       await userColection.doc(newUser.id).set(newUser.toMap());
+
+    //       return newUser;
+    //     }
+    //   } on FirebaseAuthException catch (e) {
+    //     print(e.message);
+    //   }
+    //   return null;
+    // }
   }
 }

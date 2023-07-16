@@ -126,8 +126,8 @@ class _LoginState extends State<Login> {
                     children: [
                       ElevatedButton(
                         onPressed: () {
-                          // String npassword = password ?? '';
-                          // String nusername = username ?? '';
+                          String nemail = _nEmail.text;
+                          String npassword = _nPass.text;
                           // print("ini dia" + nusername + npassword);
                           // loginUser(nusername, npassword);
                           // Navigator.pushAndRemoveUntil(
@@ -289,7 +289,7 @@ class _LoginState extends State<Login> {
                             Padding(
                               padding: const EdgeInsets.only(left: 5),
                               child: Text(
-                                'Masuk',
+                                'Register',
                                 style: TextStyle(fontSize: 18),
                               ),
                             ),
