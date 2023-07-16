@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kasindi/controller/controller_transaksi.dart';
 import 'package:kasindi/controller/controller_user.dart';
+import 'package:kasindi/model/model_user.dart';
 import 'package:kasindi/view/page/input.dart';
 import 'package:kasindi/view/widget/buttomsheet.dart';
 
@@ -15,11 +16,17 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   var cTrans = ControllerTrans();
+  ModelUser? currUser;
   //final User? user = ControllerUser().currentUser;
 
   @override
   void initState() {
     // TODO: implement initState
+    ControllerUser().getCurrentUser().then((value) {
+      setState(() {
+        currUser = value!;
+      });
+    });
     cTrans.getTrans();
     super.initState();
   }
@@ -31,7 +38,7 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text(""),
+        title: Text(currUser?.name ?? ''),
         leading: Icon(Icons.account_circle_outlined),
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.settings_outlined))
@@ -88,7 +95,7 @@ class _HomeState extends State<Home> {
                                   style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.normal,
-                                      color: Colors.grey[350])),
+                                      color: Colors.blue[350])),
                               Text('Rp. 1.000.000,00-',
                                   style: TextStyle(
                                       fontSize: 25,
