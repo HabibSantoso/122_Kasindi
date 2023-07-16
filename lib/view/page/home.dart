@@ -264,12 +264,12 @@ class _HomeState extends State<Home> {
           padding:
               const EdgeInsets.only(left: 10, right: 10, top: 2, bottom: 2),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              IconButton(onPressed: () {}, icon: Icon(Icons.auto_graph)),
+              //IconButton(onPressed: () {}, icon: Icon(Icons.auto_graph)),
               IconButton(
                   onPressed: () {
-                    // logOut();
+                    ControllerUser().singOut();
                   },
                   icon: Icon(Icons.logout))
             ],
