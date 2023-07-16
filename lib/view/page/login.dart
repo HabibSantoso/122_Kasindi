@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kasindi/controller/controller_user.dart';
 import 'package:kasindi/view/page/home.dart';
 
 class Login extends StatefulWidget {
@@ -128,6 +129,8 @@ class _LoginState extends State<Login> {
                         onPressed: () {
                           String nemail = _nEmail.text;
                           String npassword = _nPass.text;
+
+                          ControllerUser().signInOnly(nemail, npassword);
                           // print("ini dia" + nusername + npassword);
                           // loginUser(nusername, npassword);
                           // Navigator.pushAndRemoveUntil(
@@ -141,8 +144,8 @@ class _LoginState extends State<Login> {
                           //     MaterialPageRoute(
                           //         builder: (context) =>
                           //             Home(), (route) => true));
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Home()));
+                          // Navigator.push(context,
+                          //     MaterialPageRoute(builder: (context) => Home()));
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -264,6 +267,14 @@ class _LoginState extends State<Login> {
                     children: [
                       ElevatedButton(
                         onPressed: () {
+                          String remail = _rEmail.text;
+                          String rname = _rName.text;
+                          String rrole = _rRole.text;
+                          String rphone = _rPhone.text;
+                          String rpass = _rPass.text;
+
+                          ControllerUser().regiterWithEmailandPassworrd(
+                              remail, rpass, rname, rphone, rrole);
                           // String npassword = password ?? '';
                           // String nusername = username ?? '';
                           // print("ini dia" + nusername + npassword);
@@ -279,8 +290,8 @@ class _LoginState extends State<Login> {
                           //     MaterialPageRoute(
                           //         builder: (context) =>
                           //             Home(), (route) => true));
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Home()));
+                          // Navigator.push(context,
+                          //     MaterialPageRoute(builder: (context) => Home()));
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
